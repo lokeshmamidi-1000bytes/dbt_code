@@ -1,0 +1,64 @@
+version: 2
+ 
+models:
+  - name: geo_dim
+    columns:
+      - name: geo_region
+        tests:
+          - unique
+          - not_null
+  - name: aircraft_dim
+    columns:
+      - name: aircraft_model_version_type
+        tests:
+          - unique
+          - not_null
+  
+  - name: airline_dim
+    columns:
+      - name: airline_code
+        tests:
+          - unique
+          - not_null
+  - name: terminal_dim
+    columns:
+      - name: boarding_terminal
+        tests:
+          - unique
+          - not_null
+  - name: price_dim
+    columns:
+      - name: price_category_code
+        tests:
+          - unique
+          - not_null
+  - name: date_dim
+    columns:
+      - name: activity_period
+        tests:
+          - unique
+          - not_null
+  - name: activity_dim
+    columns:
+      - name: activity_type_code
+        tests:
+          - unique
+          - not_null
+  - name: cargo_dim
+    columns:
+      - name: cargo_aircraft_code
+        tests:
+          - unique
+          - not_null
+  - name: cargo_fact
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: ["activity_period", "activity_id", "cargo_id", "geo_id", "operating_airline_id", "published_airline_id"]
+  - name: landing_fact
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: ["activity_period", "aircraft_id", "geo_id", "operating_airline_id", "published_airline_id"]
+  - name: passenger_fact
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: ["activity_period", "activity_id", "terminal_id", "geo_id", "operating_airline_id", "published_airline_id", "price_id"]

@@ -1,0 +1,33 @@
+name: Deploy to ECR
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths: # replace with your file or directory
+      - 'Dockerfile'
+      - 'models/**'
+      - 'entrypoint.sh'
+
+jobs:
+  
+  build:
+    
+    name: Build Image
+    runs-on: ubuntu-latest
+
+   
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      id: build-image
+      run: |
+        docker build -t latest .
+
+    - name: Run dbt compile
+      run: |
+        # Add commands to install dbt and dependencies here
+        docker run --rm latest dbt compile
+      continue-on-error: false

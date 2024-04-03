@@ -1,0 +1,13 @@
+transformation_project:
+  outputs:
+    dev:
+      account: ah05211.ap-south-1
+      database: PIPESLINES
+      password: Alisia123
+      role: ACCOUNTADMIN
+      schema: RAW
+      threads: 1
+      type: snowflake
+      user: alisia
+      warehouse: COMPUTE_WH
+  target: dev

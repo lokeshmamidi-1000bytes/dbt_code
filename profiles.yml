@@ -1,0 +1,13 @@
+transformation_project:
+  outputs:
+    dev:
+      account: your account id
+      database: your data base
+      password: password
+      role: ACCOUNTADMIN
+      schema: schema
+      threads: 1
+      type: snowflake
+      user: user
+      warehouse: COMPUTE_WH
+  target: dev
